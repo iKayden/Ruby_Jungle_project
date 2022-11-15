@@ -1,8 +1,18 @@
 <section class="cart-show">
+  <%#
+  "empty?" Can be used on collections such as Array, Hash, Set etc.
+   Returns true when they have no elements.
+    %>
+  <% if enhanced_cart.empty? %>
+    <div class="alert alert-warning mt-5">
+      <span>Seems like your cart is empty at the moment! Check out some of our cool plants at our <%= link_to "Main Page", "/" %>
+      </span>
+    </div>
+  <% else %>
+    <header class="page-header">
+      <h1>My Cart</h1>
+    </header>
 
-  <header class="page-header">
-    <h1>My Cart</h1>
-  </header>
 
   <div class="panel panel-default items">
     <table class="table table-bordered">
@@ -48,5 +58,5 @@
       <% end %>
     </div>
   </div>
-
+  <% end %>
 </section>
