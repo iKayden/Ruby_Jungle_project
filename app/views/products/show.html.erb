@@ -9,6 +9,9 @@
       <h1><%= @product.name %></h1>
       <p><%= @product.description %></p>
       <div class="quantity">
+        <% if @product.quantity == 0 %>
+          <button type="button" class="btn soldout">Sold Out</button>
+        <% else %>
         <span><%= @product.quantity %> in stock at </span>
         <span><%= humanized_money_with_symbol @product.price %></span>
       </div>
@@ -17,6 +20,7 @@
           <%= fa_icon "shopping-cart", text: 'Add' %>
         <% end %>
       </div>
+        <% end %>
     </div>
   </article>
 
