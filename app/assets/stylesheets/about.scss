@@ -1,0 +1,13 @@
+// Place all the styles related to the About controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.about__page--image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 15%;
+}
+
+.about__page--image > img {
+  border-radius: inherit;
+}
