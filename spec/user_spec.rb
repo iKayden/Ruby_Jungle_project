@@ -97,5 +97,32 @@ RSpec.describe User, type: :model do
 
       expect(checked_user.id).to eq(@user_new.id)
     end
+
+    it "needs to allow creation of new user when an email has whitespaces in the input" do
+      @user_new = User.new(
+        first_name: "Bobby",
+        last_name: "Decartes",
+        email: "bobby1985@gmail.com",
+        password: "qwerty",
+        password_confirmation: "qwerty"
+      )
+      @user_new.save
+      checked_user = User.authenticate_with_credentials(" bobby1985@gmail.com   ", @user_new.password)
+
+      expect(checked_user.id).to eq(@user_new.id)
+    end
+    it "needs to allow creation of new user when an email types wrong cases for email in the input ('ExaMple@GmaIl.CoM')" do
+      @user_new = User.new(
+        first_name: "Bobby",
+        last_name: "Decartes",
+        email: "bobby1985@gmail.com",
+        password: "qwerty",
+        password_confirmation: "qwerty"
+      )
+      @user_new.save
+      checked_user = User.authenticate_with_credentials("boBBy1985@gMail.Com", @user_new.password)
+
+      expect(checked_user.id).to eq(@user_new.id)
+    end
   end
 end
