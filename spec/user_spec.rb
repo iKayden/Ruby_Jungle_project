@@ -82,4 +82,20 @@ RSpec.describe User, type: :model do
       expect(@user_new.errors.full_messages).to eq(["Email has already been taken"])
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it "needs to allow creation of new user with valid parameters" do
+      @user_new = User.new(
+        first_name: "Bobby",
+        last_name: "Decartes",
+        email: "bobby1985@gmail.com",
+        password: "qwerty",
+        password_confirmation: "qwerty"
+      )
+      @user_new.save
+      checked_user = User.authenticate_with_credentials(@user_new.email, @user_new.password)
+
+      expect(checked_user.id).to eq(@user_new.id)
+    end
+  end
 end
