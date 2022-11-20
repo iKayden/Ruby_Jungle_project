@@ -26,7 +26,7 @@ RSpec.describe Product, type: :model do
       )
       @product.save
       expect(@product).not_to be_valid
-      expect(@product.errors.full_messages).to eq(["Name can't be blank"])
+      expect(@product.errors.full_messages[0]).to eq("Name can't be blank")
     end
     #price
     it "needs to fail validation due to the absence of price" do
