@@ -16,7 +16,7 @@ RSpec.describe Product, type: :model do
     end
 
     #name
-    it "needs to fail validation with the absence of name" do
+    it "needs to fail validation due to the absence of name" do
       @category = Category.new(name: "testing category")
       @product = Product.new(
         name: nil,
@@ -29,7 +29,7 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to eq(["Name can't be blank"])
     end
     #price
-    it "needs to fail validation with the absence of price" do
+    it "needs to fail validation due to the absence of price" do
       @category = Category.new(name: "Hoodies")
       @product = Product.new(
         name: "Hoody",
@@ -42,15 +42,29 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to eq(["Price cents is not a number", "Price is not a number", "Price can't be blank"])
     end
     #quantity
-    it "needs to validate the presence of quantity" do
-
+    it "needs to fail validation due to the absence of quantity" do
+      @category = Category.new(name: "Pants")
+      @product = Product.new(
+        name: "Jeans",
+        category: @category,
+        price: 6000,
+        #no quantity
+      )
+      @product.save
+      expect(@product).not_to be_valid
+      expect(@product.errors.full_messages).to eq(["Quantity can't be blank"])
     end
-    # it "needs to validate the presence of category" do
-
-    # end
-    # it "needs to show an error in 'full_messages' array" do
-
-    # end
-
+    #category
+    it "needs to fail validation due to the absence of category" do
+      @product = Product.new(
+        name: "Big Hat",
+        price: 3000,
+        quantity: 100
+        #no category
+      )
+      @product.save
+      expect(@product).not_to be_valid
+      expect(@product.errors.full_messages).to eq(["Category must exist", "Category can't be blank"])
+    end
   end
 end
