@@ -7,6 +7,14 @@ CypressRails.hooks.before_server_start do
   # Called once, before either the transaction or the server is started
   cat1 = Category.find_or_create_by! name: 'Evergreens'
 
+  test_user = User.create!({
+    first_name: "Test",
+    last_name: "One",
+    email: "test@gmail.com",
+    password: "12345",
+    password_confirmation: "12345"
+  })
+
   cat1.products.create!({
     name:  'Giant Tea',
     description: "The Giant Tea is an uncommon, medium-sized plant and can be found only in some tundras. It blooms twice a year, for 3 weeks.",
